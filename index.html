@@ -3,50 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>alpha bet writhing tuttorial</title>
+    <title>alpha bet writhing tuttorial - The Answer to Everything</title>
     <style>
         body {
             margin: 0;
             padding: 20px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
+        
+        /* Cosmic Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, #1a0033 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, #002244 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, #000522 0%, transparent 70%),
+                linear-gradient(180deg, #000000 0%, #0a0a2e 50%, #000000 100%);
+            z-index: -3;
+        }
+        
+        /* Stars */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+        
+        /* Floating 42s */
+        @keyframes float42 {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes spin42 {
+            0% {
+                transform: translateX(-100vw) rotate(0deg);
+            }
+            100% {
+                transform: translateX(100vw) rotate(1080deg);
+            }
+        }
+        
+        @keyframes crazy42 {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translate(30vw, -20vh) rotate(180deg) scale(1.3);
+            }
+            50% {
+                transform: translate(-40vw, 30vh) rotate(360deg) scale(0.7);
+            }
+            75% {
+                transform: translate(20vw, -10vh) rotate(540deg) scale(1.1);
+            }
+            100% {
+                transform: translate(0, 0) rotate(720deg) scale(1);
+            }
+        }
+        
+        @keyframes diagonal42 {
+            0% {
+                transform: translate(-100vw, 100vh) rotate(0deg);
+            }
+            100% {
+                transform: translate(100vw, -100vh) rotate(1440deg);
+            }
+        }
+        
+        .answer-42 {
+            position: fixed;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.25);
+            pointer-events: none;
+            z-index: 1000;
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+            mix-blend-mode: screen;
+        }
+        
+        .answer-42.type1 {
+            animation: float42 8s linear infinite;
+        }
+        
+        .answer-42.type2 {
+            animation: spin42 12s linear infinite;
+        }
+        
+        .answer-42.type3 {
+            animation: crazy42 15s ease-in-out infinite;
+        }
+        
+        .answer-42.type4 {
+            animation: diagonal42 10s linear infinite;
+        }
+        
+        /* Nebula Effect */
+        @keyframes nebula {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        
+        .nebula {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, 
+                rgba(138, 43, 226, 0.1) 0%, 
+                rgba(75, 0, 130, 0.05) 40%, 
+                transparent 70%);
+            filter: blur(40px);
+            animation: nebula 60s linear infinite;
+            pointer-events: none;
+            z-index: -2;
+        }
+        
+        .nebula1 { top: -200px; left: -200px; }
+        .nebula2 { bottom: -300px; right: -300px; animation-delay: -30s; }
+        .nebula3 { top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -15s; }
+        
         .container {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
+        
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 12px;
             padding: 24px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 
+                0 10px 30px rgba(138, 43, 226, 0.2),
+                0 0 60px rgba(138, 43, 226, 0.1),
+                inset 0 0 20px rgba(138, 43, 226, 0.02);
+            border: 1px solid rgba(138, 43, 226, 0.2);
         }
+        
         h1 {
             color: #1f2937;
             font-size: 28px;
             margin: 0;
+            position: relative;
         }
+        
+        h1::after {
+            content: "42";
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 12px;
+            color: rgba(138, 43, 226, 0.5);
+            font-family: 'Courier New', monospace;
+        }
+        
         .progress-bar {
             width: 100%;
             height: 20px;
-            background: #e5e7eb;
+            background: rgba(229, 231, 235, 0.8);
             border-radius: 10px;
             overflow: hidden;
             margin: 10px 0;
+            position: relative;
         }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 40px,
+                rgba(138, 43, 226, 0.1) 40px,
+                rgba(138, 43, 226, 0.1) 42px
+            );
+        }
+        
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(90deg, #8a2be2, #4b0082);
             transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
         }
+        
         .letter-grid {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
             margin: 20px 0;
         }
+        
         .letter-box {
             width: 40px;
             height: 40px;
@@ -57,36 +247,66 @@
             font-weight: bold;
             font-size: 18px;
             transition: all 0.3s;
+            position: relative;
         }
+        
+        .letter-box::before {
+            content: '42';
+            position: absolute;
+            font-size: 6px;
+            top: 2px;
+            right: 2px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
         .letter-completed {
-            background: #10b981;
+            background: linear-gradient(135deg, #8a2be2, #4b0082);
             color: white;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
         }
+        
+        .letter-completed::before {
+            opacity: 0.5;
+        }
+        
         .letter-current {
-            background: #fbbf24;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
             color: #1f2937;
             animation: pulse 1s infinite;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
         }
+        
         .letter-pending {
-            background: #e5e7eb;
+            background: rgba(229, 231, 235, 0.6);
             color: #9ca3af;
         }
+        
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+            }
+            50% { 
+                transform: scale(1.1); 
+                box-shadow: 0 0 30px rgba(251, 191, 36, 0.8);
+            }
         }
+        
         .key-hints {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             padding: 16px;
-            background: #f9fafb;
+            background: rgba(249, 250, 251, 0.8);
             border-radius: 8px;
             margin-top: 16px;
         }
+        
         .key-hint {
             text-align: center;
         }
+        
         .key-hint kbd {
             padding: 4px 12px;
             background: white;
@@ -96,20 +316,24 @@
             font-family: monospace;
             font-size: 14px;
         }
+        
         .key-hint p {
             margin: 4px 0 0 0;
             font-size: 11px;
             color: #6b7280;
         }
+        
         canvas {
-            border: 2px solid #d1d5db;
+            border: 2px solid rgba(138, 43, 226, 0.3);
             border-radius: 8px;
             width: 100%;
             max-width: 700px;
             display: block;
             margin: 0 auto;
             background: white;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.2);
         }
+        
         .info-row {
             display: flex;
             justify-content: space-between;
@@ -117,18 +341,22 @@
             font-size: 14px;
             color: #6b7280;
         }
+        
         .current-letter-display {
             font-size: 20px;
             margin-bottom: 16px;
         }
+        
         .current-letter-display .letter {
             font-size: 36px;
-            color: #2563eb;
+            color: #8a2be2;
             font-weight: bold;
+            text-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
         }
+        
         #restartBtn {
             padding: 12px 24px;
-            background: #1f2937;
+            background: linear-gradient(135deg, #8a2be2, #4b0082);
             color: white;
             border: none;
             border-radius: 8px;
@@ -136,16 +364,47 @@
             cursor: pointer;
             margin-top: 20px;
             display: none;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
+            position: relative;
+            overflow: hidden;
         }
+        
+        #restartBtn::before {
+            content: '42';
+            position: absolute;
+            font-size: 40px;
+            opacity: 0.1;
+            right: -10px;
+            top: -5px;
+        }
+        
         #restartBtn:hover {
-            background: #374151;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
         }
+        
         .text-center {
             text-align: center;
+        }
+        
+        /* Secret 42 Message */
+        .cosmic-message {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            color: rgba(138, 43, 226, 0.3);
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            z-index: 100;
         }
     </style>
 </head>
 <body>
+    <div class="stars" id="starsContainer"></div>
+    <div class="nebula nebula1"></div>
+    <div class="nebula nebula2"></div>
+    <div class="nebula nebula3"></div>
+    
     <div class="container">
         <div class="card">
             <h1>alpha bet writhing tuttorial</h1>
@@ -201,8 +460,87 @@
             </div>
         </div>
     </div>
+    
+    <div class="cosmic-message">The Answer to Life, the Universe, and Everything: 42</div>
 
     <script>
+        // Generate stars
+        function generateStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // Generate floating 42s - LOTS of them!
+        function generate42s() {
+            // Initial batch of 42s
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => create42(), i * 100);
+            }
+            
+            // Keep generating more continuously
+            setInterval(() => {
+                create42();
+            }, 300);
+        }
+        
+        function create42() {
+            const answer = document.createElement('div');
+            answer.className = 'answer-42';
+            
+            // Random animation type
+            const type = Math.floor(Math.random() * 4) + 1;
+            answer.classList.add(`type${type}`);
+            
+            answer.textContent = '42';
+            
+            // Random size
+            answer.style.fontSize = (Math.random() * 60 + 15) + 'px';
+            
+            // Random starting position
+            if (type === 1) {
+                answer.style.left = Math.random() * 100 + '%';
+                answer.style.bottom = '-100px';
+            } else if (type === 2) {
+                answer.style.left = '-100px';
+                answer.style.top = Math.random() * 100 + '%';
+            } else if (type === 3) {
+                answer.style.left = Math.random() * 100 + '%';
+                answer.style.top = Math.random() * 100 + '%';
+            } else {
+                answer.style.left = '-100px';
+                answer.style.bottom = '-100px';
+            }
+            
+            // Random animation duration and delay
+            answer.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            answer.style.animationDelay = Math.random() * 2 + 's';
+            
+            // Random rotation speed
+            answer.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            document.body.appendChild(answer);
+            
+            // Clean up after animation
+            setTimeout(() => {
+                if (answer.parentNode) {
+                    answer.remove();
+                }
+            }, 20000);
+        }
+        
+        generateStars();
+        generate42s();
+        
         // 전역 변수
         const requiredLetters = ['a', 'b', 'd', 'e', 'i', 'l', 'n', 'o', 'r', 's', 't', 'u', 'y'];
         const finalMessage = "you are an absolute idiot";
@@ -326,7 +664,7 @@
         }
 
         // 획 그리기
-        function drawComicStroke(points, color = '#10b981', intensity = 1) {
+        function drawComicStroke(points, color = '#8a2be2', intensity = 1) {
             if (points.length < 2) return;
             
             const smoothed = smoothTrajectory(points);
@@ -355,11 +693,11 @@
                 drawKeyboard();
                 
                 letterStrokes.forEach(stroke => {
-                    drawComicStroke(stroke.points, '#10b981');
+                    drawComicStroke(stroke.points, '#8a2be2');
                 });
                 
                 if (currentStroke.length > 0) {
-                    drawComicStroke(currentStroke, '#10b981');
+                    drawComicStroke(currentStroke, '#8a2be2');
                 }
             } else {
                 drawFinalMessage();
@@ -378,7 +716,7 @@
                     ctx.shadowColor = '#f59e0b';
                     ctx.shadowBlur = 15;
                 } else if (isPressed) {
-                    ctx.fillStyle = '#4ade80';
+                    ctx.fillStyle = '#9b59b6';
                 } else {
                     ctx.fillStyle = '#e0e0e0';
                     ctx.shadowBlur = 0;
@@ -397,14 +735,14 @@
             });
             
             // Space 키
-            ctx.fillStyle = letterStrokes.length > 0 ? '#3b82f6' : '#9ca3af';
+            ctx.fillStyle = letterStrokes.length > 0 ? '#8a2be2' : '#9ca3af';
             ctx.fillRect(250, 270, 200, 40);
             ctx.fillStyle = 'white';
             ctx.font = 'bold 14px sans-serif';
             ctx.fillText('SPACE: 획 추가', 350, 290);
             
             // Enter 키
-            ctx.fillStyle = (letterStrokes.length > 0 || currentStroke.length > 0) ? '#10b981' : '#9ca3af';
+            ctx.fillStyle = (letterStrokes.length > 0 || currentStroke.length > 0) ? '#4b0082' : '#9ca3af';
             ctx.fillRect(480, 170, 80, 40);
             ctx.fillStyle = 'white';
             ctx.fillText('ENTER', 520, 190);
@@ -415,6 +753,20 @@
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
+            // Draw cosmic background effect in canvas
+            const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, 300);
+            gradient.addColorStop(0, 'rgba(138, 43, 226, 0.1)');
+            gradient.addColorStop(1, 'rgba(75, 0, 130, 0.05)');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw 42 watermark
+            ctx.font = 'bold 120px Courier New';
+            ctx.fillStyle = 'rgba(138, 43, 226, 0.05)';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('42', canvas.width/2, canvas.height/2);
+            
             const lines = ["you are an", "absolute", "idiot"];
             const centerX = canvas.width / 2;
             const startY = 100;
@@ -422,6 +774,9 @@
             const letterSpacing = 35;
             
             const intensity = animationProgress < 0.5 ? 1 - (animationProgress * 2) : 0;
+            
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
             
             lines.forEach((line, lineIndex) => {
                 const words = line.split(' ');
@@ -440,7 +795,7 @@
                                     x: (p.x - 350) * 0.15 + xOffset,
                                     y: (p.y - 175) * 0.15 + yOffset
                                 }));
-                                drawComicStroke(scaledPoints, '#10b981', intensity);
+                                drawComicStroke(scaledPoints, '#8a2be2', intensity);
                             });
                         }
                         xOffset += letterSpacing;
@@ -483,7 +838,7 @@
                 } else {
                     isComplete = true;
                     document.getElementById('progressCard').style.display = 'none';
-                    document.getElementById('canvasTitle').textContent = '🎉 모든 알파벳 완성! 메시지를 확인하세요!';
+                    document.getElementById('canvasTitle').textContent = '🌌 The Answer Has Been Revealed! 🌌';
                     document.getElementById('keyHint').style.display = 'none';
                     document.getElementById('strokeCount').parentElement.style.display = 'none';
                     document.getElementById('restartBtn').style.display = 'inline-block';
