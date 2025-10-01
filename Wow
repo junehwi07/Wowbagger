@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alpha bet writhing tuttorial</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f2937;
+            font-size: 28px;
+            margin: 0;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        .letter-grid {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .letter-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        .letter-completed {
+            background: #10b981;
+            color: white;
+        }
+        .letter-current {
+            background: #fbbf24;
+            color: #1f2937;
+            animation: pulse 1s infinite;
+        }
+        .letter-pending {
+            background: #e5e7eb;
+            color: #9ca3af;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .key-hints {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            padding: 16px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-top: 16px;
+        }
+        .key-hint {
+            text-align: center;
+        }
+        .key-hint kbd {
+            padding: 4px 12px;
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .key-hint p {
+            margin: 4px 0 0 0;
+            font-size: 11px;
+            color: #6b7280;
+        }
+        canvas {
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 700px;
+            display: block;
+            margin: 0 auto;
+            background: white;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+        .current-letter-display {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        .current-letter-display .letter {
+            font-size: 36px;
+            color: #2563eb;
+            font-weight: bold;
+        }
+        #restartBtn {
+            padding: 12px 24px;
+            background: #1f2937;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+        }
+        #restartBtn:hover {
+            background: #374151;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>alpha bet writhing tuttorial</h1>
+        </div>
+
+        <div class="card" id="progressCard">
+            <div class="current-letter-display">
+                현재 알파벳: <span class="letter" id="currentLetter">A</span>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="flex: 1;">
+                    <div style="font-size: 14px; color: #6b7280;">
+                        진행률: <span id="progressText">0 / 13</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="letter-grid" id="letterGrid"></div>
+
+            <div class="key-hints">
+                <div class="key-hint">
+                    <kbd>Space</kbd>
+                    <p>획 추가</p>
+                </div>
+                <div class="key-hint">
+                    <kbd>Enter</kbd>
+                    <p>알파벳 완성</p>
+                </div>
+                <div class="key-hint">
+                    <kbd>Backspace</kbd>
+                    <p>실행취소</p>
+                </div>
+                <div class="key-hint">
+                    <kbd>Esc</kbd>
+                    <p>초기화</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 id="canvasTitle" style="margin-top: 0;">키보드로 "A"를 그려주세요</h3>
+            <canvas id="canvas" width="700" height="350"></canvas>
+            <div class="info-row">
+                <span>현재 획 수: <span id="strokeCount">0</span></span>
+                <span id="keyHint">노란색으로 표시된 키가 목표 위치입니다</span>
+            </div>
+            <div class="text-center">
+                <button id="restartBtn" onclick="restart()">다시 시작</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 전역 변수
+        const requiredLetters = ['a', 'b', 'd', 'e', 'i', 'l', 'n', 'o', 'r', 's', 't', 'u', 'y'];
+        const finalMessage = "you are an absolute idiot";
+        let currentLetterIndex = 0;
+        let currentStroke = [];
+        let letterStrokes = [];
+        let completedLetters = {};
+        let keysDown = new Map();
+        let isComplete = false;
+        let animationProgress = 0;
+        let animationId = null;
+
+        // 파라미터
+        const PARAMS = {
+            STROKE_TIMEOUT: 300,
+            SMOOTHING_FACTOR: 0.3,
+            MIN_STROKE_LENGTH: 2,
+            CURVE_SEGMENTS: 20,
+            WOBBLE_AMPLITUDE: 2,
+            WOBBLE_FREQUENCY: 0.15,
+            THICKNESS_VARIATION: 1.5,
+            JITTER_AMOUNT: 1.2
+        };
+
+        // 키보드 레이아웃
+        const KEYBOARD_LAYOUT = {
+            'a': [80, 170], 's': [130, 170], 'd': [180, 170], 'f': [230, 170], 
+            'g': [280, 170], 'h': [330, 170], 'j': [380, 170], 'k': [430, 170], 
+            'l': [480, 170], 'q': [65, 110], 'w': [115, 110], 'e': [165, 110], 
+            'r': [215, 110], 't': [265, 110], 'y': [315, 110], 'u': [365, 110], 
+            'i': [415, 110], 'o': [465, 110], 'p': [515, 110], 'z': [105, 230], 
+            'x': [155, 230], 'c': [205, 230], 'v': [255, 230], 'b': [305, 230], 
+            'n': [355, 230], 'm': [405, 230]
+        };
+
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // 초기화
+        function init() {
+            updateLetterGrid();
+            updateProgress();
+            drawCanvas();
+        }
+
+        function getCurrentLetter() {
+            return requiredLetters[currentLetterIndex];
+        }
+
+        function updateLetterGrid() {
+            const grid = document.getElementById('letterGrid');
+            grid.innerHTML = '';
+            requiredLetters.forEach((letter, idx) => {
+                const box = document.createElement('div');
+                box.className = 'letter-box';
+                box.textContent = letter.toUpperCase();
+                
+                if (completedLetters[letter]) {
+                    box.classList.add('letter-completed');
+                } else if (idx === currentLetterIndex) {
+                    box.classList.add('letter-current');
+                } else {
+                    box.classList.add('letter-pending');
+                }
+                
+                grid.appendChild(box);
+            });
+        }
+
+        function updateProgress() {
+            const completed = Object.keys(completedLetters).length;
+            const progress = (completed / requiredLetters.length) * 100;
+            
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${completed} / ${requiredLetters.length}`;
+            document.getElementById('currentLetter').textContent = getCurrentLetter().toUpperCase();
+            document.getElementById('canvasTitle').textContent = `키보드로 "${getCurrentLetter().toUpperCase()}"를 그려주세요`;
+            document.getElementById('strokeCount').textContent = letterStrokes.length;
+        }
+
+        // Comic Sans 효과
+        function addComicWobble(points, intensity = 1) {
+            return points.map((p, i) => ({
+                x: p.x + Math.sin(i * PARAMS.WOBBLE_FREQUENCY) * PARAMS.WOBBLE_AMPLITUDE * intensity +
+                   (Math.random() - 0.5) * PARAMS.JITTER_AMOUNT * intensity,
+                y: p.y + Math.cos(i * PARAMS.WOBBLE_FREQUENCY * 1.3) * PARAMS.WOBBLE_AMPLITUDE * intensity +
+                   (Math.random() - 0.5) * PARAMS.JITTER_AMOUNT * intensity,
+                thickness: 3 + Math.sin(i * 0.2) * PARAMS.THICKNESS_VARIATION * intensity + Math.random() * 0.5 * intensity
+            }));
+        }
+
+        // 스무딩
+        function smoothTrajectory(points) {
+            if (points.length < 3) return points;
+            const smoothed = [];
+            const tension = PARAMS.SMOOTHING_FACTOR;
+            
+            for (let i = 0; i < points.length - 1; i++) {
+                const p0 = points[Math.max(0, i - 1)];
+                const p1 = points[i];
+                const p2 = points[i + 1];
+                const p3 = points[Math.min(points.length - 1, i + 2)];
+                
+                for (let t = 0; t < PARAMS.CURVE_SEGMENTS; t++) {
+                    const tt = t / PARAMS.CURVE_SEGMENTS;
+                    const tt2 = tt * tt;
+                    const tt3 = tt2 * tt;
+                    
+                    smoothed.push({
+                        x: 0.5 * ((2 * p1.x) + (-p0.x + p2.x) * tt * tension +
+                           (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * tt2 * tension +
+                           (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * tt3 * tension),
+                        y: 0.5 * ((2 * p1.y) + (-p0.y + p2.y) * tt * tension +
+                           (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * tt2 * tension +
+                           (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * tt3 * tension)
+                    });
+                }
+            }
+            smoothed.push(points[points.length - 1]);
+            return smoothed;
+        }
+
+        // 획 그리기
+        function drawComicStroke(points, color = '#10b981', intensity = 1) {
+            if (points.length < 2) return;
+            
+            const smoothed = smoothTrajectory(points);
+            const wobbled = intensity > 0.01 ? addComicWobble(smoothed, intensity) : smoothed.map(p => ({...p, thickness: 3}));
+            
+            ctx.strokeStyle = color;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            for (let i = 1; i < wobbled.length; i++) {
+                const prev = wobbled[i - 1];
+                const curr = wobbled[i];
+                ctx.lineWidth = (prev.thickness + curr.thickness) / 2;
+                ctx.beginPath();
+                ctx.moveTo(prev.x, prev.y);
+                ctx.lineTo(curr.x, curr.y);
+                ctx.stroke();
+            }
+        }
+
+        // 캔버스 그리기
+        function drawCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (!isComplete) {
+                drawKeyboard();
+                
+                letterStrokes.forEach(stroke => {
+                    drawComicStroke(stroke.points, '#10b981');
+                });
+                
+                if (currentStroke.length > 0) {
+                    drawComicStroke(currentStroke, '#10b981');
+                }
+            } else {
+                drawFinalMessage();
+            }
+        }
+
+        // 키보드 그리기
+        function drawKeyboard() {
+            Object.entries(KEYBOARD_LAYOUT).forEach(([key, pos]) => {
+                const [x, y] = pos;
+                const isPressed = keysDown.has(key);
+                const isTarget = key === getCurrentLetter();
+                
+                if (isTarget) {
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.shadowColor = '#f59e0b';
+                    ctx.shadowBlur = 15;
+                } else if (isPressed) {
+                    ctx.fillStyle = '#4ade80';
+                } else {
+                    ctx.fillStyle = '#e0e0e0';
+                    ctx.shadowBlur = 0;
+                }
+                
+                ctx.fillRect(x - 20, y - 20, 40, 40);
+                ctx.strokeStyle = '#999';
+                ctx.strokeRect(x - 20, y - 20, 40, 40);
+                ctx.shadowBlur = 0;
+                
+                ctx.fillStyle = '#333';
+                ctx.font = '12px monospace';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(key.toUpperCase(), x, y);
+            });
+            
+            // Space 키
+            ctx.fillStyle = letterStrokes.length > 0 ? '#3b82f6' : '#9ca3af';
+            ctx.fillRect(250, 270, 200, 40);
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 14px sans-serif';
+            ctx.fillText('SPACE: 획 추가', 350, 290);
+            
+            // Enter 키
+            ctx.fillStyle = (letterStrokes.length > 0 || currentStroke.length > 0) ? '#10b981' : '#9ca3af';
+            ctx.fillRect(480, 170, 80, 40);
+            ctx.fillStyle = 'white';
+            ctx.fillText('ENTER', 520, 190);
+        }
+
+        // 최종 메시지 그리기
+        function drawFinalMessage() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            const lines = ["you are an", "absolute", "idiot"];
+            const centerX = canvas.width / 2;
+            const startY = 100;
+            const lineHeight = 80;
+            const letterSpacing = 35;
+            
+            const intensity = animationProgress < 0.5 ? 1 - (animationProgress * 2) : 0;
+            
+            lines.forEach((line, lineIndex) => {
+                const words = line.split(' ');
+                const totalWidth = words.reduce((acc, word) => acc + word.length * letterSpacing + 60, -60);
+                let xOffset = centerX - totalWidth / 2;
+                const yOffset = startY + lineIndex * lineHeight;
+                
+                words.forEach(word => {
+                    for (let i = 0; i < word.length; i++) {
+                        const char = word[i];
+                        const letterData = completedLetters[char];
+                        
+                        if (letterData) {
+                            letterData.forEach(stroke => {
+                                const scaledPoints = stroke.points.map(p => ({
+                                    x: (p.x - 350) * 0.15 + xOffset,
+                                    y: (p.y - 175) * 0.15 + yOffset
+                                }));
+                                drawComicStroke(scaledPoints, '#10b981', intensity);
+                            });
+                        }
+                        xOffset += letterSpacing;
+                    }
+                    xOffset += 60;
+                });
+            });
+        }
+
+        // 획 추가
+        function addStroke() {
+            if (currentStroke.length >= PARAMS.MIN_STROKE_LENGTH) {
+                letterStrokes.push({
+                    id: Date.now(),
+                    points: [...currentStroke]
+                });
+                currentStroke = [];
+                updateProgress();
+                drawCanvas();
+            }
+        }
+
+        // 알파벳 완성
+        function completeLetter() {
+            if (letterStrokes.length > 0 || currentStroke.length >= PARAMS.MIN_STROKE_LENGTH) {
+                let finalStrokes = [...letterStrokes];
+                if (currentStroke.length >= PARAMS.MIN_STROKE_LENGTH) {
+                    finalStrokes.push({
+                        id: Date.now(),
+                        points: [...currentStroke]
+                    });
+                }
+                
+                completedLetters[getCurrentLetter()] = finalStrokes;
+                letterStrokes = [];
+                currentStroke = [];
+                
+                if (currentLetterIndex < requiredLetters.length - 1) {
+                    currentLetterIndex++;
+                } else {
+                    isComplete = true;
+                    document.getElementById('progressCard').style.display = 'none';
+                    document.getElementById('canvasTitle').textContent = '🎉 모든 알파벳 완성! 메시지를 확인하세요!';
+                    document.getElementById('keyHint').style.display = 'none';
+                    document.getElementById('strokeCount').parentElement.style.display = 'none';
+                    document.getElementById('restartBtn').style.display = 'inline-block';
+                    startAnimation();
+                }
+                
+                updateLetterGrid();
+                updateProgress();
+                drawCanvas();
+            }
+        }
+
+        // 애니메이션
+        function startAnimation() {
+            animationProgress = 0;
+            const animate = () => {
+                animationProgress += 0.01;
+                if (animationProgress >= 1) {
+                    animationProgress = 1;
+                    cancelAnimationFrame(animationId);
+                } else {
+                    animationId = requestAnimationFrame(animate);
+                }
+                drawCanvas();
+            };
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // 다시 시작
+        function restart() {
+            currentLetterIndex = 0;
+            currentStroke = [];
+            letterStrokes = [];
+            completedLetters = {};
+            isComplete = false;
+            animationProgress = 0;
+            
+            document.getElementById('progressCard').style.display = 'block';
+            document.getElementById('keyHint').style.display = 'inline';
+            document.getElementById('strokeCount').parentElement.style.display = 'inline';
+            document.getElementById('restartBtn').style.display = 'none';
+            
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+            
+            init();
+        }
+
+        // 키보드 이벤트
+        document.addEventListener('keydown', (e) => {
+            if (isComplete) return;
+            
+            const key = e.key.toLowerCase();
+            
+            if (e.key === ' ') {
+                e.preventDefault();
+                addStroke();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                completeLetter();
+            } else if (e.key === 'Backspace') {
+                e.preventDefault();
+                if (currentStroke.length > 0) {
+                    currentStroke = [];
+                } else if (letterStrokes.length > 0) {
+                    letterStrokes.pop();
+                    updateProgress();
+                }
+                drawCanvas();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                currentStroke = [];
+                letterStrokes = [];
+                updateProgress();
+                drawCanvas();
+            } else if (KEYBOARD_LAYOUT[key]) {
+                e.preventDefault();
+                const [x, y] = KEYBOARD_LAYOUT[key];
+                currentStroke.push({ x, y });
+                keysDown.set(key, true);
+                drawCanvas();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            const key = e.key.toLowerCase();
+            keysDown.delete(key);
+            drawCanvas();
+        });
+
+        // 시작
+        init();
+    </script>
+</body>
+</html>
