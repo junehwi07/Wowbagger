@@ -542,9 +542,9 @@
         
         function generateAliens() {
             for (let i = 0; i < 8; i++) {
-                setTimeout(() => createFlyingAlien(), i * 1000);
+                setTimeout(() => createFlyingAlien(), i * 1);
             }
-            setInterval(() => createFlyingAlien(), 3000);
+            setInterval(() => createFlyingAlien(), 1);
         }
         
         generateStars();
