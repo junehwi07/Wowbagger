@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>alpha bet writhing tuttorial - The Answer to Everything</title>
+    <title>alpha bet writhing tuttorial</title>
     <style>
         body {
             margin: 0;
@@ -15,7 +15,6 @@
             overflow-x: hidden;
         }
         
-        /* Cosmic Background */
         body::before {
             content: '';
             position: fixed;
@@ -31,7 +30,6 @@
             z-index: -3;
         }
         
-        /* Stars */
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
@@ -54,58 +52,16 @@
             animation: twinkle 3s infinite;
         }
         
-        /* Floating 42s */
         @keyframes float42 {
-            0% {
-                transform: translateY(100vh) rotate(0deg) scale(1);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.4;
-            }
-            90% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(720deg) scale(1.5);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) rotate(0deg) scale(1); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) rotate(720deg) scale(1.5); opacity: 0; }
         }
         
         @keyframes spin42 {
-            0% {
-                transform: translateX(-100vw) rotate(0deg);
-            }
-            100% {
-                transform: translateX(100vw) rotate(1080deg);
-            }
-        }
-        
-        @keyframes crazy42 {
-            0% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translate(30vw, -20vh) rotate(180deg) scale(1.3);
-            }
-            50% {
-                transform: translate(-40vw, 30vh) rotate(360deg) scale(0.7);
-            }
-            75% {
-                transform: translate(20vw, -10vh) rotate(540deg) scale(1.1);
-            }
-            100% {
-                transform: translate(0, 0) rotate(720deg) scale(1);
-            }
-        }
-        
-        @keyframes diagonal42 {
-            0% {
-                transform: translate(-100vw, 100vh) rotate(0deg);
-            }
-            100% {
-                transform: translate(100vw, -100vh) rotate(1440deg);
-            }
+            0% { transform: translateX(-100vw) rotate(0deg); }
+            100% { transform: translateX(100vw) rotate(1080deg); }
         }
         
         .answer-42 {
@@ -119,23 +75,9 @@
             mix-blend-mode: screen;
         }
         
-        .answer-42.type1 {
-            animation: float42 8s linear infinite;
-        }
+        .answer-42.type1 { animation: float42 8s linear infinite; }
+        .answer-42.type2 { animation: spin42 12s linear infinite; }
         
-        .answer-42.type2 {
-            animation: spin42 12s linear infinite;
-        }
-        
-        .answer-42.type3 {
-            animation: crazy42 15s ease-in-out infinite;
-        }
-        
-        .answer-42.type4 {
-            animation: diagonal42 10s linear infinite;
-        }
-        
-        /* Nebula Effect */
         @keyframes nebula {
             0% { transform: rotate(0deg) scale(1); }
             50% { transform: rotate(180deg) scale(1.1); }
@@ -146,10 +88,7 @@
             position: fixed;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, 
-                rgba(138, 43, 226, 0.1) 0%, 
-                rgba(75, 0, 130, 0.05) 40%, 
-                transparent 70%);
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, rgba(75, 0, 130, 0.05) 40%, transparent 70%);
             filter: blur(40px);
             animation: nebula 60s linear infinite;
             pointer-events: none;
@@ -158,7 +97,107 @@
         
         .nebula1 { top: -200px; left: -200px; }
         .nebula2 { bottom: -300px; right: -300px; animation-delay: -30s; }
-        .nebula3 { top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: -15s; }
+        
+        /* Flying Aliens */
+        .flying-alien {
+            position: fixed;
+            pointer-events: none;
+            z-index: 500;
+        }
+
+        @keyframes alienFloat1 {
+            0% { transform: translate(-200px, 100vh) rotate(0deg) scale(0.3); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(50vw, -200px) rotate(360deg) scale(0.4); opacity: 0; }
+        }
+
+        @keyframes alienFloat2 {
+            0% { transform: translate(100vw, 100vh) rotate(0deg) scale(0.35); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translate(-200px, -200px) rotate(-360deg) scale(0.45); opacity: 0; }
+        }
+
+        .flying-alien.type1 { animation: alienFloat1 12s linear infinite; }
+        .flying-alien.type2 { animation: alienFloat2 15s linear infinite; }
+
+        @keyframes bodyDance {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(-3deg); }
+            50% { transform: translateY(-5px) rotate(3deg); }
+            75% { transform: translateY(-12px) rotate(-2deg); }
+        }
+
+        @keyframes leftArmFlap {
+            0% { transform: rotate(-15deg) translateY(0px); }
+            25% { transform: rotate(-60deg) translateY(-30px) translateX(-20px); }
+            50% { transform: rotate(-45deg) translateY(-25px) translateX(-15px); }
+            75% { transform: rotate(-70deg) translateY(-35px) translateX(-25px); }
+            100% { transform: rotate(-15deg) translateY(0px); }
+        }
+
+        @keyframes rightArmFlap {
+            0% { transform: rotate(15deg) translateY(0px); }
+            25% { transform: rotate(70deg) translateY(-35px) translateX(25px); }
+            50% { transform: rotate(50deg) translateY(-20px) translateX(20px); }
+            75% { transform: rotate(60deg) translateY(-30px) translateX(20px); }
+            100% { transform: rotate(15deg) translateY(0px); }
+        }
+
+        @keyframes leftHandDance {
+            0% { transform: rotate(0deg) translate(0, 0); }
+            25% { transform: rotate(-30deg) translate(-40px, -60px); }
+            50% { transform: rotate(-25deg) translate(-30px, -50px); }
+            75% { transform: rotate(-40deg) translate(-50px, -70px); }
+            100% { transform: rotate(0deg) translate(0, 0); }
+        }
+
+        @keyframes rightHandDance {
+            0% { transform: rotate(0deg) translate(0, 0); }
+            25% { transform: rotate(40deg) translate(50px, -65px); }
+            50% { transform: rotate(30deg) translate(35px, -45px); }
+            75% { transform: rotate(35deg) translate(45px, -60px); }
+            100% { transform: rotate(0deg) translate(0, 0); }
+        }
+
+        @keyframes fingerWiggle {
+            0%, 100% { transform: rotate(var(--base-rotation)) scale(1); }
+            50% { transform: rotate(calc(var(--base-rotation) + 10deg)) scale(1.05); }
+        }
+
+        @keyframes headBob {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(5deg) translateY(-5px); }
+        }
+
+        @keyframes crazyGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(124, 179, 66, 0.4)); }
+            50% { filter: drop-shadow(0 0 30px rgba(124, 179, 66, 0.9)); }
+        }
+
+        @keyframes mouthOpen {
+            0%, 15% { height: 0px; }
+            20%, 80% { height: 25px; }
+            85%, 100% { height: 0px; }
+        }
+        
+        @keyframes tongueWiggle {
+            0%, 20% { height: 0px; opacity: 0; transform: translateX(-50%) rotate(0deg); }
+            30% { height: 50px; opacity: 1; transform: translateX(-50%) rotate(360deg); }
+            70% { height: 50px; opacity: 1; transform: translateX(-50%) rotate(1440deg); }
+            80%, 100% { height: 0px; opacity: 0; transform: translateX(-50%) rotate(1440deg); }
+        }
+
+        @keyframes spitFly1 {
+            0%, 35%, 70%, 100% { opacity: 0; transform: translate(0, 0); }
+            40% { opacity: 1; transform: translate(-30px, -20px); }
+        }
+
+        @keyframes spitFly2 {
+            0%, 35%, 70%, 100% { opacity: 0; transform: translate(0, 0); }
+            42% { opacity: 1; transform: translate(25px, -25px); }
+        }
         
         .container {
             max-width: 900px;
@@ -173,10 +212,7 @@
             border-radius: 12px;
             padding: 24px;
             margin-bottom: 20px;
-            box-shadow: 
-                0 10px 30px rgba(138, 43, 226, 0.2),
-                0 0 60px rgba(138, 43, 226, 0.1),
-                inset 0 0 20px rgba(138, 43, 226, 0.02);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.2);
             border: 1px solid rgba(138, 43, 226, 0.2);
         }
         
@@ -184,17 +220,6 @@
             color: #1f2937;
             font-size: 28px;
             margin: 0;
-            position: relative;
-        }
-        
-        h1::after {
-            content: "42";
-            position: absolute;
-            right: 0;
-            top: 0;
-            font-size: 12px;
-            color: rgba(138, 43, 226, 0.5);
-            font-family: 'Courier New', monospace;
         }
         
         .progress-bar {
@@ -204,23 +229,6 @@
             border-radius: 10px;
             overflow: hidden;
             margin: 10px 0;
-            position: relative;
-        }
-        
-        .progress-bar::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent,
-                transparent 40px,
-                rgba(138, 43, 226, 0.1) 40px,
-                rgba(138, 43, 226, 0.1) 42px
-            );
         }
         
         .progress-fill {
@@ -247,27 +255,12 @@
             font-weight: bold;
             font-size: 18px;
             transition: all 0.3s;
-            position: relative;
-        }
-        
-        .letter-box::before {
-            content: '42';
-            position: absolute;
-            font-size: 6px;
-            top: 2px;
-            right: 2px;
-            opacity: 0;
-            transition: opacity 0.3s;
         }
         
         .letter-completed {
             background: linear-gradient(135deg, #8a2be2, #4b0082);
             color: white;
             box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
-        }
-        
-        .letter-completed::before {
-            opacity: 0.5;
         }
         
         .letter-current {
@@ -283,14 +276,8 @@
         }
         
         @keyframes pulse {
-            0%, 100% { 
-                transform: scale(1); 
-                box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
-            }
-            50% { 
-                transform: scale(1.1); 
-                box-shadow: 0 0 30px rgba(251, 191, 36, 0.8);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         
         .key-hints {
@@ -365,37 +352,14 @@
             margin-top: 20px;
             display: none;
             box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        #restartBtn::before {
-            content: '42';
-            position: absolute;
-            font-size: 40px;
-            opacity: 0.1;
-            right: -10px;
-            top: -5px;
         }
         
         #restartBtn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.6);
         }
         
         .text-center {
             text-align: center;
-        }
-        
-        /* Secret 42 Message */
-        .cosmic-message {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            color: rgba(138, 43, 226, 0.3);
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            z-index: 100;
         }
     </style>
 </head>
@@ -403,7 +367,6 @@
     <div class="stars" id="starsContainer"></div>
     <div class="nebula nebula1"></div>
     <div class="nebula nebula2"></div>
-    <div class="nebula nebula3"></div>
     
     <div class="container">
         <div class="card">
@@ -460,11 +423,8 @@
             </div>
         </div>
     </div>
-    
-    <div class="cosmic-message">The Answer to Life, the Universe, and Everything: 42</div>
 
     <script>
-        // Generate stars
         function generateStars() {
             const starsContainer = document.getElementById('starsContainer');
             for (let i = 0; i < 200; i++) {
@@ -480,93 +440,127 @@
             }
         }
         
-        // Generate floating 42s - LOTS of them!
         function generate42s() {
-            // Initial batch of 42s
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 30; i++) {
                 setTimeout(() => create42(), i * 100);
             }
-            
-            // Keep generating more continuously
-            setInterval(() => {
-                create42();
-            }, 300);
+            setInterval(() => create42(), 500);
         }
         
         function create42() {
             const answer = document.createElement('div');
             answer.className = 'answer-42';
-            
-            // Random animation type
-            const type = Math.floor(Math.random() * 4) + 1;
+            const type = Math.floor(Math.random() * 2) + 1;
             answer.classList.add(`type${type}`);
-            
             answer.textContent = '42';
-            
-            // Random size
             answer.style.fontSize = (Math.random() * 60 + 15) + 'px';
             
-            // Random starting position
             if (type === 1) {
                 answer.style.left = Math.random() * 100 + '%';
                 answer.style.bottom = '-100px';
-            } else if (type === 2) {
-                answer.style.left = '-100px';
-                answer.style.top = Math.random() * 100 + '%';
-            } else if (type === 3) {
-                answer.style.left = Math.random() * 100 + '%';
-                answer.style.top = Math.random() * 100 + '%';
             } else {
                 answer.style.left = '-100px';
-                answer.style.bottom = '-100px';
+                answer.style.top = Math.random() * 100 + '%';
             }
             
-            // Random animation duration and delay
             answer.style.animationDuration = (Math.random() * 5 + 5) + 's';
-            answer.style.animationDelay = Math.random() * 2 + 's';
-            
-            // Random rotation speed
-            answer.style.transform = `rotate(${Math.random() * 360}deg)`;
-            
             document.body.appendChild(answer);
+            setTimeout(() => answer.remove(), 15000);
+        }
+        
+        function createFlyingAlien() {
+            const alienDiv = document.createElement('div');
+            alienDiv.className = 'flying-alien';
+            const type = Math.floor(Math.random() * 2) + 1;
+alienDiv.classList.add(`type${type}`);
+
+if (type === 1) { // 👈 좌측 하단 외계인
+    // 더 길게 설정 (예: 20초 ~ 25초)
+    alienDiv.style.animationDuration = (Math.random() * 5 + 20) + 's';
+} else { // 그 외 외계인
+    // 기존 시간 유지 (10초 ~ 15초)
+    alienDiv.style.animationDuration = (Math.random() * 5 + 10) + 's';
+}
+            alienDiv.style.animationDelay = Math.random() * 3 + 's';
             
-            // Clean up after animation
-            setTimeout(() => {
-                if (answer.parentNode) {
-                    answer.remove();
-                }
-            }, 20000);
+            alienDiv.innerHTML = `
+                <div style="width: 400px; height: 550px; position: relative; animation: bodyDance 0.8s ease-in-out infinite;">
+                    <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 90px; height: 110px; background: linear-gradient(to bottom, #d0d0d0, #a0a0a0); border-radius: 45% 45% 50% 50%; z-index: 10; animation: headBob 0.7s ease-in-out infinite;">
+                        <div style="position: absolute; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px); border-radius: 45% 45% 50% 50%;"></div>
+                        <div style="position: absolute; top: 40px; left: 50%; transform: translateX(-50%); width: 70px; display: flex; justify-content: space-between;">
+                            <div style="width: 28px; height: 38px; background: #000; border-radius: 50%; position: relative; transform: rotate(10deg);">
+                                <div style="position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 14px; height: 20px; background: rgba(255,255,255,0.95); border-radius: 50%;"></div>
+                            </div>
+                            <div style="width: 28px; height: 38px; background: #000; border-radius: 50%; position: relative; transform: rotate(-10deg);">
+                                <div style="position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 14px; height: 20px; background: rgba(255,255,255,0.95); border-radius: 50%;"></div>
+                            </div>
+                        </div>
+                        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 35px; background: #000; border-radius: 50%; z-index: 11; animation: mouthOpen 3s ease-in-out infinite;">
+                            <div style="position: absolute; top: 0; left: 50%; width: 20px; background: linear-gradient(to bottom, #ff6b9d, #e63946); border-radius: 40% 40% 50% 50%; transform: translateX(-50%); transform-origin: 50% 20%; z-index: 10; animation: tongueWiggle 3s ease-in-out infinite;"></div>
+                            <div style="position: absolute; width: 100px; height: 100px; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                <div style="position: absolute; width: 4px; height: 4px; background: rgba(200, 230, 255, 0.8); border-radius: 50%; top: 50%; left: 50%; animation: spitFly1 3s ease-out infinite;"></div>
+                                <div style="position: absolute; width: 4px; height: 4px; background: rgba(200, 230, 255, 0.8); border-radius: 50%; top: 50%; left: 50%; animation: spitFly2 3s ease-out infinite;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="position: absolute; top: 110px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-style: solid; border-width: 0 150px 70px 150px; border-color: transparent transparent #7cb342 transparent; z-index: 9; animation: crazyGlow 0.5s ease-in-out infinite;"></div>
+                    <div style="position: absolute; top: 170px; left: 50%; transform: translateX(-50%); width: 250px; height: 350px; background: #1a1a1a; z-index: 5; border-radius: 10px 10px 0 0;"></div>
+                    <div style="position: absolute; top: 300px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-style: solid; border-width: 220px 160px 0 160px; border-color: #1a1a1a transparent transparent transparent; z-index: 4;"></div>
+                    <div style="position: absolute; top: 170px; left: 105px; width: 15px; height: 350px; background: #7cb342; z-index: 6;"></div>
+                    <div style="position: absolute; top: 170px; right: 105px; width: 15px; height: 350px; background: #7cb342; z-index: 6;"></div>
+                    <div style="position: absolute; top: 180px; left: 50%; transform: translateX(-50%); width: 40px; height: 320px; background: linear-gradient(to bottom, #e8e8e8, #c0c0c0, #a0a0a0); z-index: 7; clip-path: polygon(40% 0%, 60% 0%, 65% 100%, 35% 100%);"></div>
+                    <div style="position: absolute; top: 200px; left: -40px; width: 140px; height: 200px; background: #1a1a1a; z-index: 3; border-radius: 70% 30% 50% 50%; animation: leftArmFlap 0.6s ease-in-out infinite; transform-origin: 80% 20%;">
+                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 80%; height: 20px; background: #7cb342; border-radius: 50%;"></div>
+                    </div>
+                    <div style="position: absolute; top: 200px; right: -40px; width: 140px; height: 200px; background: #1a1a1a; z-index: 3; border-radius: 30% 70% 50% 50%; animation: rightArmFlap 0.65s ease-in-out infinite; transform-origin: 20% 20%;">
+                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); width: 80%; height: 20px; background: #7cb342; border-radius: 50%;"></div>
+                    </div>
+                    <div style="position: absolute; bottom: 80px; left: 20px; width: 55px; height: 65px; background: #1a1a1a; border-radius: 50%; z-index: 2; animation: leftHandDance 0.6s ease-in-out infinite;">
+                        <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 50px; height: 30px;">
+                            <div style="position: absolute; bottom: 0; left: 2px; width: 8px; height: 18px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: -20deg;"></div>
+                            <div style="position: absolute; bottom: 0; left: 11px; width: 8px; height: 20px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: -10deg;"></div>
+                            <div style="position: absolute; bottom: 0; left: 20px; width: 8px; height: 22px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: 0deg;"></div>
+                            <div style="position: absolute; bottom: 0; left: 29px; width: 8px; height: 20px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: 10deg;"></div>
+                            <div style="position: absolute; bottom: 0; left: 38px; width: 8px; height: 18px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: 20deg;"></div>
+                        </div>
+                    </div>
+                    <div style="position: absolute; bottom: 80px; right: 20px; width: 55px; height: 65px; background: #1a1a1a; border-radius: 50%; z-index: 2; animation: rightHandDance 0.65s ease-in-out infinite;">
+                        <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 50px; height: 30px;">
+                            <div style="position: absolute; bottom: 0; left: 2px; width: 8px; height: 18px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: -20deg;"></div>
+                            <div style="position: absolute; bottom: 0; left: 11px; width: 8px; height: 20px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: -10deg;"></div>
+                            <div style="position: absolute; bottom: 0; left: 20px; width: 8px; height: 22px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: 0deg;"></div>
+                            <div style="position: absolute; bottom: 0; left: 29px; width: 8px; height: 20px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: 10deg;"></div>
+                            <div style="position: absolute; bottom: 0; left: 38px; width: 8px; height: 18px; background: #1a1a1a; border-radius: 4px; animation: fingerWiggle 0.3s ease-in-out infinite; --base-rotation: 20deg;"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(alienDiv);
+            setTimeout(() => alienDiv.remove(), 35000);
+        }
+        
+        function generateAliens() {
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => createFlyingAlien(), i * 1000);
+            }
+            setInterval(() => createFlyingAlien(), 3000);
         }
         
         generateStars();
         generate42s();
         
-        // 전역 변수
         const requiredLetters = ['a', 'b', 'd', 'e', 'i', 'l', 'n', 'o', 'r', 's', 't', 'u', 'y'];
-        const finalMessage = "you are an absolute idiot";
         let currentLetterIndex = 0;
         let currentStroke = [];
         let letterStrokes = [];
         let completedLetters = {};
-        let normalizedLetters = {};  // 정규화된 문자 데이터 저장
+        let normalizedLetters = {};
         let keysDown = new Map();
         let isComplete = false;
         let animationProgress = 0;
         let animationId = null;
 
-        // 파라미터
-        const PARAMS = {
-            STROKE_TIMEOUT: 300,
-            SMOOTHING_FACTOR: 0.3,
-            MIN_STROKE_LENGTH: 2,
-            CURVE_SEGMENTS: 20,
-            WOBBLE_AMPLITUDE: 2,
-            WOBBLE_FREQUENCY: 0.15,
-            THICKNESS_VARIATION: 1.5,
-            JITTER_AMOUNT: 1.2
-        };
-
-        // 키보드 레이아웃
         const KEYBOARD_LAYOUT = {
             'a': [80, 170], 's': [130, 170], 'd': [180, 170], 'f': [230, 170], 
             'g': [280, 170], 'h': [330, 170], 'j': [380, 170], 'k': [430, 170], 
@@ -580,7 +574,6 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        // 초기화
         function init() {
             updateLetterGrid();
             updateProgress();
@@ -591,11 +584,8 @@
             return requiredLetters[currentLetterIndex];
         }
 
-        // Bounding Box 계산 함수
         function calculateBoundingBox(strokes) {
-            let minX = Infinity, minY = Infinity;
-            let maxX = -Infinity, maxY = -Infinity;
-            
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
             strokes.forEach(stroke => {
                 stroke.points.forEach(point => {
                     minX = Math.min(minX, point.x);
@@ -604,40 +594,23 @@
                     maxY = Math.max(maxY, point.y);
                 });
             });
-            
             return {
                 minX, minY, maxX, maxY,
-                width: maxX - minX,
-                height: maxY - minY,
                 centerX: (minX + maxX) / 2,
                 centerY: (minY + maxY) / 2
             };
         }
 
-        // 문자를 정규화하는 함수 (중심점 기준으로)
         function normalizeLetter(strokes) {
             const bbox = calculateBoundingBox(strokes);
-            
-            // 중심점 기준으로 정규화된 strokes 생성
             const normalized = strokes.map(stroke => ({
                 ...stroke,
                 points: stroke.points.map(point => ({
-                    x: point.x - bbox.centerX,  // 중심점 기준으로 재배치
+                    x: point.x - bbox.centerX,
                     y: point.y - bbox.centerY
                 }))
             }));
-            
-            return {
-                strokes: normalized,
-                bbox: {
-                    width: bbox.width,
-                    height: bbox.height,
-                    originalCenter: {
-                        x: bbox.centerX,
-                        y: bbox.centerY
-                    }
-                }
-            };
+            return { strokes: normalized, bbox };
         }
 
         function updateLetterGrid() {
@@ -655,7 +628,6 @@
                 } else {
                     box.classList.add('letter-pending');
                 }
-                
                 grid.appendChild(box);
             });
         }
@@ -663,7 +635,6 @@
         function updateProgress() {
             const completed = Object.keys(completedLetters).length;
             const progress = (completed / requiredLetters.length) * 100;
-            
             document.getElementById('progressBar').style.width = progress + '%';
             document.getElementById('progressText').textContent = `${completed} / ${requiredLetters.length}`;
             document.getElementById('currentLetter').textContent = getCurrentLetter().toUpperCase();
@@ -671,90 +642,32 @@
             document.getElementById('strokeCount').textContent = letterStrokes.length;
         }
 
-        // Comic Sans 효과
-        function addComicWobble(points, intensity = 1) {
-            return points.map((p, i) => ({
-                x: p.x + Math.sin(i * PARAMS.WOBBLE_FREQUENCY) * PARAMS.WOBBLE_AMPLITUDE * intensity +
-                   (Math.random() - 0.5) * PARAMS.JITTER_AMOUNT * intensity,
-                y: p.y + Math.cos(i * PARAMS.WOBBLE_FREQUENCY * 1.3) * PARAMS.WOBBLE_AMPLITUDE * intensity +
-                   (Math.random() - 0.5) * PARAMS.JITTER_AMOUNT * intensity,
-                thickness: 3 + Math.sin(i * 0.2) * PARAMS.THICKNESS_VARIATION * intensity + Math.random() * 0.5 * intensity
-            }));
-        }
-
-        // 스무딩
-        function smoothTrajectory(points) {
-            if (points.length < 3) return points;
-            const smoothed = [];
-            const tension = PARAMS.SMOOTHING_FACTOR;
-            
-            for (let i = 0; i < points.length - 1; i++) {
-                const p0 = points[Math.max(0, i - 1)];
-                const p1 = points[i];
-                const p2 = points[i + 1];
-                const p3 = points[Math.min(points.length - 1, i + 2)];
-                
-                for (let t = 0; t < PARAMS.CURVE_SEGMENTS; t++) {
-                    const tt = t / PARAMS.CURVE_SEGMENTS;
-                    const tt2 = tt * tt;
-                    const tt3 = tt2 * tt;
-                    
-                    smoothed.push({
-                        x: 0.5 * ((2 * p1.x) + (-p0.x + p2.x) * tt * tension +
-                           (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * tt2 * tension +
-                           (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * tt3 * tension),
-                        y: 0.5 * ((2 * p1.y) + (-p0.y + p2.y) * tt * tension +
-                           (2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * tt2 * tension +
-                           (-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * tt3 * tension)
-                    });
-                }
-            }
-            smoothed.push(points[points.length - 1]);
-            return smoothed;
-        }
-
-        // 획 그리기
-        function drawComicStroke(points, color = '#8a2be2', intensity = 1) {
+        function drawComicStroke(points, color = '#8a2be2') {
             if (points.length < 2) return;
-            
-            const smoothed = smoothTrajectory(points);
-            const wobbled = intensity > 0.01 ? addComicWobble(smoothed, intensity) : smoothed.map(p => ({...p, thickness: 3}));
-            
             ctx.strokeStyle = color;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
-            
-            for (let i = 1; i < wobbled.length; i++) {
-                const prev = wobbled[i - 1];
-                const curr = wobbled[i];
-                ctx.lineWidth = (prev.thickness + curr.thickness) / 2;
-                ctx.beginPath();
-                ctx.moveTo(prev.x, prev.y);
-                ctx.lineTo(curr.x, curr.y);
-                ctx.stroke();
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            for (let i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i].x, points[i].y);
             }
+            ctx.stroke();
         }
 
-        // 캔버스 그리기
         function drawCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             if (!isComplete) {
                 drawKeyboard();
-                
-                letterStrokes.forEach(stroke => {
-                    drawComicStroke(stroke.points, '#8a2be2');
-                });
-                
-                if (currentStroke.length > 0) {
-                    drawComicStroke(currentStroke, '#8a2be2');
-                }
+                letterStrokes.forEach(stroke => drawComicStroke(stroke.points));
+                if (currentStroke.length > 0) drawComicStroke(currentStroke);
             } else {
                 drawFinalMessage();
             }
         }
 
-        // 키보드 그리기
         function drawKeyboard() {
             Object.entries(KEYBOARD_LAYOUT).forEach(([key, pos]) => {
                 const [x, y] = pos;
@@ -784,52 +697,38 @@
                 ctx.fillText(key.toUpperCase(), x, y);
             });
             
-            // Space 키
             ctx.fillStyle = letterStrokes.length > 0 ? '#8a2be2' : '#9ca3af';
             ctx.fillRect(250, 270, 200, 40);
             ctx.fillStyle = 'white';
             ctx.font = 'bold 14px sans-serif';
             ctx.fillText('SPACE: 획 추가', 350, 290);
             
-            // Enter 키
             ctx.fillStyle = (letterStrokes.length > 0 || currentStroke.length > 0) ? '#4b0082' : '#9ca3af';
             ctx.fillRect(480, 170, 80, 40);
             ctx.fillStyle = 'white';
             ctx.fillText('ENTER', 520, 190);
         }
 
-        // 최종 메시지 그리기
         function drawFinalMessage() {
             ctx.fillStyle = 'white';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Draw cosmic background effect in canvas
-            const gradient = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 0, canvas.width/2, canvas.height/2, 300);
+            const gradient = ctx.createRadialGradient(350, 175, 0, 350, 175, 300);
             gradient.addColorStop(0, 'rgba(138, 43, 226, 0.1)');
             gradient.addColorStop(1, 'rgba(75, 0, 130, 0.05)');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Draw 42 watermark
-            ctx.font = 'bold 120px Courier New';
-            ctx.fillStyle = 'rgba(138, 43, 226, 0.05)';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('42', canvas.width/2, canvas.height/2);
-            
             const lines = ["you are an", "absolute", "idiot"];
             const centerX = canvas.width / 2;
             const startY = 100;
             const lineHeight = 80;
-            const letterSpacing = 45;  // 문자 간격
-            const wordSpacing = 20;    // 단어 간격
-            
+            const letterSpacing = 45;
+            const wordSpacing = 20;
             const intensity = animationProgress < 0.5 ? 1 - (animationProgress * 2) : 0;
             
             lines.forEach((line, lineIndex) => {
                 const words = line.split(' ');
-                
-                // 각 라인의 전체 너비 계산
                 let totalWidth = 0;
                 words.forEach((word, wordIndex) => {
                     totalWidth += word.length * letterSpacing;
@@ -845,55 +744,40 @@
                         const letterData = normalizedLetters[char];
                         
                         if (letterData) {
-                            const targetScale = 0.15;  // 문자 크기 스케일
-                            
-                            // 정규화된 데이터를 사용하여 각 문자를 중심점 기준으로 배치
+                            const targetScale = 0.15;
                             letterData.strokes.forEach(stroke => {
                                 const scaledPoints = stroke.points.map(p => ({
-                                    x: p.x * targetScale + xOffset + letterSpacing/2,  // 중심점 맞춤
-                                    y: p.y * targetScale + yOffset + lineHeight/3     // 세로 중심 조정
+                                    x: p.x * targetScale + xOffset + letterSpacing/2,
+                                    y: p.y * targetScale + yOffset + lineHeight/3
                                 }));
-                                drawComicStroke(scaledPoints, '#8a2be2', intensity);
+                                drawComicStroke(scaledPoints, '#8a2be2');
                             });
                         }
                         xOffset += letterSpacing;
                     }
-                    
-                    if (wordIndex < words.length - 1) {
-                        xOffset += wordSpacing;
-                    }
+                    if (wordIndex < words.length - 1) xOffset += wordSpacing;
                 });
             });
         }
 
-        // 획 추가
         function addStroke() {
-            if (currentStroke.length >= PARAMS.MIN_STROKE_LENGTH) {
-                letterStrokes.push({
-                    id: Date.now(),
-                    points: [...currentStroke]
-                });
+            if (currentStroke.length >= 2) {
+                letterStrokes.push({ id: Date.now(), points: [...currentStroke] });
                 currentStroke = [];
                 updateProgress();
                 drawCanvas();
             }
         }
 
-        // 알파벳 완성
         function completeLetter() {
-            if (letterStrokes.length > 0 || currentStroke.length >= PARAMS.MIN_STROKE_LENGTH) {
+            if (letterStrokes.length > 0 || currentStroke.length >= 2) {
                 let finalStrokes = [...letterStrokes];
-                if (currentStroke.length >= PARAMS.MIN_STROKE_LENGTH) {
-                    finalStrokes.push({
-                        id: Date.now(),
-                        points: [...currentStroke]
-                    });
+                if (currentStroke.length >= 2) {
+                    finalStrokes.push({ id: Date.now(), points: [...currentStroke] });
                 }
                 
                 const currentLetter = getCurrentLetter();
                 completedLetters[currentLetter] = finalStrokes;
-                
-                // 정규화된 버전 저장
                 normalizedLetters[currentLetter] = normalizeLetter(finalStrokes);
                 
                 letterStrokes = [];
@@ -909,6 +793,7 @@
                     document.getElementById('strokeCount').parentElement.style.display = 'none';
                     document.getElementById('restartBtn').style.display = 'inline-block';
                     startAnimation();
+                    generateAliens();
                 }
                 
                 updateLetterGrid();
@@ -917,7 +802,6 @@
             }
         }
 
-        // 애니메이션
         function startAnimation() {
             animationProgress = 0;
             const animate = () => {
@@ -933,7 +817,6 @@
             animationId = requestAnimationFrame(animate);
         }
 
-        // 다시 시작
         function restart() {
             currentLetterIndex = 0;
             currentStroke = [];
@@ -943,22 +826,19 @@
             isComplete = false;
             animationProgress = 0;
             
+            document.querySelectorAll('.flying-alien').forEach(alien => alien.remove());
+            
             document.getElementById('progressCard').style.display = 'block';
             document.getElementById('keyHint').style.display = 'inline';
             document.getElementById('strokeCount').parentElement.style.display = 'inline';
             document.getElementById('restartBtn').style.display = 'none';
             
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-            }
-            
+            if (animationId) cancelAnimationFrame(animationId);
             init();
         }
 
-        // 키보드 이벤트
         document.addEventListener('keydown', (e) => {
             if (isComplete) return;
-            
             const key = e.key.toLowerCase();
             
             if (e.key === ' ') {
@@ -997,7 +877,6 @@
             drawCanvas();
         });
 
-        // 시작
         init();
     </script>
 </body>
