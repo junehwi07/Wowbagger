@@ -472,15 +472,15 @@
             const alienDiv = document.createElement('div');
             alienDiv.className = 'flying-alien';
             const type = Math.floor(Math.random() * 2) + 1;
-alienDiv.classList.add(`type${type}`);
+            alienDiv.classList.add(`type${type}`);
 
-if (type === 1) { // 👈 좌측 하단 외계인
-    // 더 길게 설정 (예: 20초 ~ 25초)
-    alienDiv.style.animationDuration = (Math.random() * 5 + 20) + 's';
-} else { // 그 외 외계인
-    // 기존 시간 유지 (10초 ~ 15초)
-    alienDiv.style.animationDuration = (Math.random() * 5 + 10) + 's';
-}
+            if (type === 1) { // 👈 좌측 하단 외계인
+                // 더 길게 설정 (예: 20초 ~ 25초)
+                alienDiv.style.animationDuration = (Math.random() * 5 + 20) + 's';
+            } else { // 그 외 외계인
+                // 기존 시간 유지 (10초 ~ 15초)
+                alienDiv.style.animationDuration = (Math.random() * 5 + 10) + 's';
+            }
             alienDiv.style.animationDelay = Math.random() * 3 + 's';
             
             alienDiv.innerHTML = `
@@ -496,7 +496,7 @@ if (type === 1) { // 👈 좌측 하단 외계인
                             </div>
                         </div>
                         <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 35px; background: #000; border-radius: 50%; z-index: 11; animation: mouthOpen 3s ease-in-out infinite;">
-                            <div style="position: absolute; top: 0; left: 50%; width: 20px; background: linear-gradient(to bottom, #ff6b9d, #e63946); border-radius: 40% 40% 50% 50%; transform: translateX(-50%); transform-origin: 50% 20%; z-index: 10; animation: tongueWiggle 3s ease-in-out infinite;"></div>
+                            <div style="position: absolute; top: 0; left: 50%; width: 20px; background: linear-gradient(to bottom, #ff6b9d, #e63946); border-radius: 40% 40% 50% 50%; transform: translateX(-50%); transform-origin: 50% 0; z-index: 10; animation: tongueWiggle 3s ease-in-out infinite;"></div>
                             <div style="position: absolute; width: 100px; height: 100px; top: 50%; left: 50%; transform: translate(-50%, -50%);">
                                 <div style="position: absolute; width: 4px; height: 4px; background: rgba(200, 230, 255, 0.8); border-radius: 50%; top: 50%; left: 50%; animation: spitFly1 3s ease-out infinite;"></div>
                                 <div style="position: absolute; width: 4px; height: 4px; background: rgba(200, 230, 255, 0.8); border-radius: 50%; top: 50%; left: 50%; animation: spitFly2 3s ease-out infinite;"></div>
@@ -555,7 +555,7 @@ if (type === 1) { // 👈 좌측 하단 외계인
         let currentStroke = [];
         let letterStrokes = [];
         let completedLetters = {};
-        let normalizedLetters = {};
+        let normalizedLetters = {}; // 정규화된 문자 데이터 저장
         let keysDown = new Map();
         let isComplete = false;
         let animationProgress = 0;
@@ -584,8 +584,10 @@ if (type === 1) { // 👈 좌측 하단 외계인
             return requiredLetters[currentLetterIndex];
         }
 
+        // Bounding Box 계산 함수
         function calculateBoundingBox(strokes) {
             let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            
             strokes.forEach(stroke => {
                 stroke.points.forEach(point => {
                     minX = Math.min(minX, point.x);
@@ -594,23 +596,40 @@ if (type === 1) { // 👈 좌측 하단 외계인
                     maxY = Math.max(maxY, point.y);
                 });
             });
+            
             return {
                 minX, minY, maxX, maxY,
+                width: maxX - minX,
+                height: maxY - minY,
                 centerX: (minX + maxX) / 2,
                 centerY: (minY + maxY) / 2
             };
         }
 
+        // 문자를 정규화하는 함수 (중심점 기준으로)
         function normalizeLetter(strokes) {
             const bbox = calculateBoundingBox(strokes);
+            
+            // 중심점 기준으로 정규화된 strokes 생성
             const normalized = strokes.map(stroke => ({
                 ...stroke,
                 points: stroke.points.map(point => ({
-                    x: point.x - bbox.centerX,
+                    x: point.x - bbox.centerX, // 중심점 기준으로 재배치
                     y: point.y - bbox.centerY
                 }))
             }));
-            return { strokes: normalized, bbox };
+            
+            return {
+                strokes: normalized,
+                bbox: {
+                    width: bbox.width,
+                    height: bbox.height,
+                    originalCenter: {
+                        x: bbox.centerX,
+                        y: bbox.centerY
+                    }
+                }
+            };
         }
 
         function updateLetterGrid() {
@@ -723,12 +742,14 @@ if (type === 1) { // 👈 좌측 하단 외계인
             const centerX = canvas.width / 2;
             const startY = 100;
             const lineHeight = 80;
-            const letterSpacing = 45;
-            const wordSpacing = 20;
+            const letterSpacing = 45; // 문자 간격
+            const wordSpacing = 20;   // 단어 간격
             const intensity = animationProgress < 0.5 ? 1 - (animationProgress * 2) : 0;
             
             lines.forEach((line, lineIndex) => {
                 const words = line.split(' ');
+                
+                // 각 라인의 전체 너비 계산
                 let totalWidth = 0;
                 words.forEach((word, wordIndex) => {
                     totalWidth += word.length * letterSpacing;
@@ -742,20 +763,25 @@ if (type === 1) { // 👈 좌측 하단 외계인
                     for (let i = 0; i < word.length; i++) {
                         const char = word[i];
                         const letterData = normalizedLetters[char];
-                        
+
                         if (letterData) {
-                            const targetScale = 0.15;
+                            const targetScale = 0.15; // 문자 크기 스케일
+                            
+                            // 정규화된 데이터를 사용하여 각 문자를 중심점 기준으로 배치
                             letterData.strokes.forEach(stroke => {
                                 const scaledPoints = stroke.points.map(p => ({
-                                    x: p.x * targetScale + xOffset + letterSpacing/2,
-                                    y: p.y * targetScale + yOffset + lineHeight/3
+                                    x: p.x * targetScale + xOffset + letterSpacing/2, // 중심점 맞춤
+                                    y: p.y * targetScale + yOffset + lineHeight/3    // 세로 중심 조정
                                 }));
                                 drawComicStroke(scaledPoints, '#8a2be2');
                             });
                         }
                         xOffset += letterSpacing;
                     }
-                    if (wordIndex < words.length - 1) xOffset += wordSpacing;
+                    
+                    if (wordIndex < words.length - 1) {
+                        xOffset += wordSpacing;
+                    }
                 });
             });
         }
@@ -778,6 +804,8 @@ if (type === 1) { // 👈 좌측 하단 외계인
                 
                 const currentLetter = getCurrentLetter();
                 completedLetters[currentLetter] = finalStrokes;
+                
+                // 정규화된 버전 저장
                 normalizedLetters[currentLetter] = normalizeLetter(finalStrokes);
                 
                 letterStrokes = [];
@@ -833,7 +861,9 @@ if (type === 1) { // 👈 좌측 하단 외계인
             document.getElementById('strokeCount').parentElement.style.display = 'inline';
             document.getElementById('restartBtn').style.display = 'none';
             
-            if (animationId) cancelAnimationFrame(animationId);
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
             init();
         }
 
