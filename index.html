@@ -813,6 +813,9 @@
                 
                 if (currentLetterIndex < requiredLetters.length - 1) {
                     currentLetterIndex++;
+                    // 👇 이 두 줄을 if 블록 안으로 이동시켰습니다.
+                    updateLetterGrid(); 
+                    updateProgress();
                 } else {
                     isComplete = true;
                     document.getElementById('progressCard').style.display = 'none';
@@ -823,9 +826,6 @@
                     startAnimation();
                     generateAliens();
                 }
-                
-                updateLetterGrid();
-                updateProgress();
                 drawCanvas();
             }
         }
