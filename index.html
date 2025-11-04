@@ -536,6 +536,26 @@
             66% { transform: translateX(2px); }
         }
 
+        /* --- 추가된 애니메이션 --- */
+        @keyframes spinAndFlicker {
+            0% { 
+                transform: rotate(0deg); 
+                filter: brightness(1);
+            }
+            50% { 
+                filter: brightness(3) saturate(2); /* 밝은 플래시 효과 */
+            }
+            100% { 
+                transform: rotate(360deg); 
+                filter: brightness(1);
+            }
+        }
+
+        .spin-effect {
+            animation: spinAndFlicker 0.3s ease-in-out;
+        }
+        /* --- 여기까지 --- */
+
         .dialogue-emoji {
             font-size: 40px;
             animation: emojiPulse 1s ease-in-out infinite;
@@ -892,11 +912,11 @@
     <!-- Canvas Area -->
     <div class="container">
         <div class="card" id="canvasCard">
-            <h3 id="canvasTitle" style="margin-top: 0;">A!</h3>
+            <h3 id="canvasTitle" style="margin-top: 0;"></h3>
             <canvas id="canvas" width="700" height="350"></canvas>
             <div class="info-row">
                 <span>획 수: <span id="strokeCount">0</span></span>
-                <span id="keyHint">노란색 키를 따라가세요</span>
+                <!-- <span id="keyHint">노란색 키를 따라가세요</span> -->
             </div>
             <div class="text-center">
                 <button id="restartBtn" onclick="restart()">😈</button>
@@ -1430,11 +1450,11 @@
             if (tutorialMode) {
                 document.getElementById('progressCount').textContent = `?/?`;
                 document.getElementById('currentLetter').textContent = 'Z';
-                document.getElementById('canvasTitle').textContent = 'Z....💤';
+                document.getElementById('canvasTitle').textContent = '';
             } else {
                 document.getElementById('progressCount').textContent = `${completed}/13`;
                 document.getElementById('currentLetter').textContent = getCurrentLetter().toUpperCase();
-                document.getElementById('canvasTitle').textContent = `키보드로 "${getCurrentLetter().toUpperCase()}"를 그려보세요!`;
+                document.getElementById('canvasTitle').textContent = '';
             }
             document.getElementById('strokeCount').textContent = letterStrokes.length;
         }
@@ -1479,13 +1499,9 @@
             Object.entries(KEYBOARD_LAYOUT).forEach(([key, pos]) => {
                 const [x, y] = pos;
                 const isPressed = keysDown.has(key);
-                const isTarget = key === getCurrentLetter() && !tutorialMode; // No highlight in tutorial
+                // const isTarget = key === getCurrentLetter() && !tutorialMode; // No highlight in tutorial
                 
-                if (isTarget) {
-                    ctx.fillStyle = '#fbbf24';
-                    ctx.shadowColor = '#f59e0b';
-                    ctx.shadowBlur = 15;
-                } else if (isPressed) {
+                if (isPressed) {
                     ctx.fillStyle = '#9b59b6';
                 } else {
                     ctx.fillStyle = '#e0e0e0';
@@ -1682,7 +1698,7 @@
                     
                     // Hide canvas title and info immediately
                     document.getElementById('canvasTitle').style.display = 'none';
-                    document.getElementById('keyHint').parentElement.style.display = 'none';
+                    document.getElementById('strokeCount').parentElement.style.display = 'none'; // Hide the whole info-row
                     
                     // Immediately expand the canvas card to cover everything
                     const canvasCard = document.getElementById('canvasCard');
@@ -1757,7 +1773,7 @@
             
             // Reset canvas UI
             document.getElementById('canvasTitle').style.display = '';
-            document.getElementById('keyHint').parentElement.style.display = '';
+            document.getElementById('strokeCount').parentElement.style.display = ''; // Show the whole info-row
             document.getElementById('restartBtn').style.display = 'none';
             
             // Reset Score display
@@ -1806,7 +1822,7 @@
             document.getElementById('canvas').className = '';
             document.getElementById('canvasCard').className = 'card';
             document.getElementById('alienHead').className = 'alien-head';
-            document.getElementById('canvasTitle').textContent = 'Z....💤';
+            document.getElementById('canvasTitle').textContent = '';
             
             // Reset canvas card styling that was changed for final reveal
             const canvasCard = document.getElementById('canvasCard');
@@ -1821,7 +1837,7 @@
             // Reset restart button styling
             const restartBtn = document.getElementById('restartBtn');
             restartBtn.style = '';
-            restartBtn.textContent = 'rere';
+            restartBtn.textContent = '😈';
             
             // Reset dialogue
             dialogueManager.history = [];
@@ -1858,6 +1874,16 @@
                 }
             } else if (e.key === 'Enter') {
                 e.preventDefault();
+                
+                // --- 추가된 코드 ---
+                // 스핀 및 깜빡임 효과 적용
+                if (!document.body.classList.contains('spin-effect')) {
+                    document.body.classList.add('spin-effect');
+                    setTimeout(() => {
+                        document.body.classList.remove('spin-effect');
+                    }, 300); // 0.3초 (애니메이션 지속 시간)
+                }
+                // --- 여기까지 ---
                 
                 // First check if dialogue is typing - if so, skip it
                 if (dialogueManager.isTyping) {
@@ -1913,3 +1939,6 @@
     </script>
 </body>
 </html>
+
+
+
